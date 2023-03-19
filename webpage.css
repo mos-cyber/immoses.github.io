@@ -1,0 +1,57 @@
+body{
+    background-image: url(newbg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.logpage{
+    background-color:aliceblue;
+    position: ;
+    padding:23px;
+    float:  center 100%;
+     margin-left:32%;
+    margin-right:35%;
+  margin-top: 80px;
+    margin-bottom: 80px;
+    box-shadow: 2px 2px 2px 2px;
+    width: 400px;
+    height: 340px;
+}
+.logo{
+   float: center 100%;
+    margin-left: 45%;
+    margin-right: 45%;
+    
+}
+.button1{
+     margin-left: 15em;
+     border-radius: 45%;
+    border-bottom-color: cyan;
+    border-style: dotted;
+    
+}
+.button2{
+    margin-bottom:;
+    float: right;
+    margin-left: ;
+    border-radius: 45%;
+     border-bottom-color: cyan;
+    border-style: dotted;
+}
+.create{
+    float: right;
+    padding: px;
+    margin-left: 10px;
+    margin-right: 6px;
+    margin-top: 
+    margin-bottom: 10em;
+    border-radius: 45%;
+     border-bottom-color: cyan;
+    border-style: dotted;
+    
+}
+.btn{
+    padding: 10px;
+    position: relative;
+}
+.create:is (:hover, :focus){background-color:blue;}
+}
