@@ -4,6 +4,51 @@ export interface User {
   name: string;
   farmName?: string;
   location?: string;
+  subscription: Subscription;
+}
+
+export interface Subscription {
+  plan: 'basic' | 'pro' | 'premium';
+  status: 'active' | 'inactive' | 'cancelled' | 'trial';
+  startDate: Date;
+  endDate?: Date;
+  trialEndsAt?: Date;
+}
+
+export interface SubscriptionPlan {
+  id: string;
+  name: string;
+  price: number;
+  billingPeriod: 'monthly' | 'yearly';
+  features: string[];
+  maxCrops: number;
+  maxAnimals: number;
+  advancedRecommendations: boolean;
+  pestDatabase: boolean;
+  weatherIntegration: boolean;
+  exportReports: boolean;
+  prioritySupport: boolean;
+  customBranding: boolean;
+}
+
+export interface PaymentMethod {
+  id: string;
+  type: 'card' | 'paypal' | 'bank_transfer';
+  last4?: string;
+  brand?: string;
+  expiryMonth?: number;
+  expiryYear?: number;
+  isDefault: boolean;
+}
+
+export interface PaymentHistory {
+  id: string;
+  amount: number;
+  currency: string;
+  status: 'succeeded' | 'pending' | 'failed';
+  date: Date;
+  description: string;
+  invoiceUrl?: string;
 }
 
 export interface AuthContextType {
@@ -12,6 +57,7 @@ export interface AuthContextType {
   register: (userData: RegisterData) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
+  updateSubscription: (plan: string) => Promise<boolean>;
 }
 
 export interface RegisterData {
@@ -89,4 +135,5 @@ export interface Recommendation {
   priority: 'low' | 'medium' | 'high' | 'urgent';
   dueDate?: Date;
   relatedId?: string;
+  isPremium?: boolean;
 }
