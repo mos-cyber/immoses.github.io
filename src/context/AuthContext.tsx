@@ -41,7 +41,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: email,
           name: 'John Farmer',
           farmName: 'Green Valley Farm',
-          location: 'California, USA'
+          location: 'California, USA',
+          subscription: {
+            plan: 'basic',
+            status: 'trial',
+            startDate: new Date(),
+            trialEndsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000) // 14 days trial
+          }
         };
         setUser(userData);
         localStorage.setItem('aceVisionUser', JSON.stringify(userData));
@@ -79,7 +85,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         email: userData.email,
         name: userData.name,
         farmName: userData.farmName,
-        location: userData.location
+        location: userData.location,
+        subscription: {
+          plan: 'basic',
+          status: 'trial',
+          startDate: new Date(),
+          trialEndsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000) // 14 days trial
+        }
       };
       
       // Save to localStorage (in real app, this would save to backend)
@@ -89,6 +101,47 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       setUser(newUser);
       localStorage.setItem('aceVisionUser', JSON.stringify(newUser));
+      setIsLoading(false);
+      return true;
+    } catch (error) {
+      setIsLoading(false);
+      return false;
+    }
+  };
+
+  const updateSubscription = async (planId: string): Promise<boolean> => {
+    if (!user) return false;
+    
+    setIsLoading(true);
+    try {
+      // Simulate API call for subscription update
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Extract plan details from planId
+      const [planName, billingPeriod] = planId.split('-');
+      
+      const updatedUser: User = {
+        ...user,
+        subscription: {
+          plan: planName as 'basic' | 'pro' | 'premium',
+          status: 'active',
+          startDate: new Date(),
+          endDate: billingPeriod === 'yearly' 
+            ? new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) 
+            : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+        }
+      };
+      
+      setUser(updatedUser);
+      localStorage.setItem('aceVisionUser', JSON.stringify(updatedUser));
+      
+      // Update in users array as well
+      const users = JSON.parse(localStorage.getItem('aceVisionUsers') || '[]');
+      const updatedUsers = users.map((u: User) => 
+        u.id === user.id ? updatedUser : u
+      );
+      localStorage.setItem('aceVisionUsers', JSON.stringify(updatedUsers));
+      
       setIsLoading(false);
       return true;
     } catch (error) {
@@ -107,7 +160,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     register,
     logout,
-    isLoading
+    isLoading,
+    updateSubscription
   };
 
   return (
