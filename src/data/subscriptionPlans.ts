@@ -4,7 +4,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: 'basic-monthly',
     name: 'Basic',
-    price: 0,
+    price: 5,
     billingPeriod: 'monthly',
     features: [
       'Up to 5 crops tracking',
@@ -26,7 +26,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: 'pro-monthly',
     name: 'Pro',
-    price: 29,
+    price: 10,
     billingPeriod: 'monthly',
     features: [
       'Up to 25 crops tracking',
@@ -50,7 +50,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: 'premium-monthly',
     name: 'Premium',
-    price: 79,
+    price: 15,
     billingPeriod: 'monthly',
     features: [
       'Unlimited crops tracking',
@@ -76,7 +76,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: 'pro-yearly',
     name: 'Pro',
-    price: 290, // 2 months free
+    price: 100, // 2 months free (10 * 10 months)
     billingPeriod: 'yearly',
     features: [
       'Up to 25 crops tracking',
@@ -101,7 +101,7 @@ export const subscriptionPlans: SubscriptionPlan[] = [
   {
     id: 'premium-yearly',
     name: 'Premium',
-    price: 790, // 2 months free
+    price: 150, // 2 months free (15 * 10 months)
     billingPeriod: 'yearly',
     features: [
       'Unlimited crops tracking',
